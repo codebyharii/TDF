@@ -401,6 +401,134 @@ h1, h2, h3, h4, h5, h6 {
     color: #ffffff;
 }
 
+/* ===== Social Cards Fan Carousel ===== */
+.fan-carousel-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 2rem 1rem;
+    background-color: #FAF9F6;
+    z-index: 20;
+}
+
+@media (min-width: 1024px) {
+    .fan-carousel-section {
+        padding: 4rem 2rem;
+    }
+}
+
+.fan-carousel-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1440px;
+    height: 70vh; /* Based on the React budget */
+    min-height: 400px;
+}
+
+.fan-layout {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1280px;
+    height: 100%;
+}
+
+.fan-card {
+    position: absolute;
+    width: 350px;
+    height: 480px; /* Base size, will scale */
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    background-color: #ddd;
+    /* Transform values handled by GSAP */
+}
+
+@media (max-width: 768px) {
+    .fan-card {
+        width: 180px;
+        height: 250px;
+    }
+}
+
+.fan-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Pagination Controls */
+.fan-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    z-index: 30;
+}
+
+.fan-arrow {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(0,0,0,0.1);
+    background-color: rgba(0,0,0,0.05);
+    backdrop-filter: blur(16px);
+    color: rgba(0,0,0,0.4);
+    cursor: pointer;
+    flex-shrink: 0;
+    z-index: 30;
+    outline: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.fan-arrow:hover {
+    border-color: rgba(0,0,0,0.25);
+    color: rgba(0,0,0,0.7);
+}
+
+.fan-arrow:active {
+    opacity: 0.7;
+}
+
+.fan-arrow svg {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.fan-dots {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.fan-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+}
+
+.fan-dot.active {
+    background-color: rgba(0,0,0,0.7);
+    transform: scale(1.3);
+}
+
 /* ===== Collections Section ===== */
 .collections {
     padding: 8rem 5%;

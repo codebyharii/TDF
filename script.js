@@ -212,5 +212,212 @@ document.addEventListener('DOMContentLoaded', () => {
                 opacity: 1
             });
         });
-    });
+    }); // <-- Restored missing bracket for gsap.ticker.add()
+
+    // --- Social Cards Fan Carousel ---
+    const DEMO_CARDS = [
+        { imgUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=700&fit=crop", alt: "Mountain landscape" },
+        { imgUrl: "https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=400&h=700&fit=crop", alt: "City night" },
+        { imgUrl: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=700&fit=crop", alt: "Foggy forest" },
+        { imgUrl: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=700&fit=crop", alt: "Sunlit woods" },
+        { imgUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=700&fit=crop", alt: "Tropical beach" },
+        { imgUrl: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&h=700&fit=crop", alt: "Starry mountain" },
+        { imgUrl: "https://images.unsplash.com/photo-1476820865390-c52aeebb9891?w=400&h=700&fit=crop", alt: "Golden sunset" },
+        { imgUrl: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=700&fit=crop", alt: "Lake reflection" },
+        { imgUrl: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=400&h=700&fit=crop", alt: "Green valley" },
+        { imgUrl: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=700&fit=crop", alt: "Sunbeam nature" }
+    ];
+
+    const MAX_VISIBLE = 7;
+    const HALF = 3;
+    const totalFanCards = DEMO_CARDS.length;
+    let centerIndex = HALF;
+    let isAnimating = false;
+    let activeHoverSlot = null;
+
+    const FAN_POSITIONS = [
+        { rot: -21, scale: 0.7756, x: -39, y: 9.5, zIndex: 1 },
+        { rot: -14, scale: 0.8498, x: -29, y: 5.2, zIndex: 2 },
+        { rot: -7,  scale: 0.9346, x: -14, y: 1.7, zIndex: 3 },
+        { rot: 0,   scale: 1.0,    x: 0,   y: 0.0, zIndex: 10 },
+        { rot: 7,   scale: 0.9346, x: 14,  y: 1.7, zIndex: 3 },
+        { rot: 14,  scale: 0.8498, x: 29,  y: 5.2, zIndex: 2 },
+        { rot: 21,  scale: 0.7756, x: 39,  y: 9.5, zIndex: 1 },
+    ];
+
+    function getResponsiveMultiplier() {
+        const w = window.innerWidth;
+        if (w < 480) return 0.28;
+        if (w < 640) return 0.38;
+        if (w < 768) return 0.5;
+        if (w < 1024) return 0.75;
+        return 1.0;
+    }
+
+    function getHeightMultiplier() {
+        const w = window.innerWidth;
+        let idealPx;
+        if (w < 480) idealPx = 22 * 16;
+        else if (w < 640) idealPx = 26 * 16;
+        else if (w < 768) idealPx = 28 * 16;
+        else if (w < 1024) idealPx = 34 * 16;
+        else idealPx = 38 * 16;
+        const available = window.innerHeight * 0.7;
+        return available >= idealPx ? 1 : available / idealPx;
+    }
+
+    function getVisibleMap(center) {
+        const map = new Map();
+        for (let slot = 0; slot < MAX_VISIBLE; slot++) {
+            let idx = ((center + slot - HALF) % totalFanCards + totalFanCards) % totalFanCards;
+            map.set(idx, slot);
+        }
+        return map;
+    }
+
+    const fanLayout = document.getElementById('fan-layout');
+    const fanDots = document.getElementById('fan-dots');
+    const fanCardsEl = [];
+
+    if (fanLayout && fanDots) {
+        // Init HTML
+        DEMO_CARDS.forEach((card, i) => {
+            const el = document.createElement('div');
+            el.className = 'fan-card';
+            el.innerHTML = `<div class="relative w-full h-full overflow-hidden"><img src="${card.imgUrl}" alt="${card.alt}"></div>`;
+            fanLayout.appendChild(el);
+            fanCardsEl.push(el);
+
+            const dot = document.createElement('span');
+            dot.className = 'fan-dot' + (i === centerIndex ? ' active' : '');
+            dot.dataset.index = i;
+            fanDots.appendChild(dot);
+        });
+
+        const updateFanLayout = (direction = null, isFirst = false) => {
+            if (isAnimating && !isFirst) return;
+            isAnimating = true;
+
+            const visibleMap = getVisibleMap(centerIndex);
+            const mult = getResponsiveMultiplier();
+            const hMult = getHeightMultiplier();
+
+            // Update Dots
+            Array.from(fanDots.children).forEach((dot, i) => {
+                if (i === centerIndex) dot.classList.add('active');
+                else dot.classList.remove('active');
+            });
+
+            let completed = 0;
+            const onComplete = () => {
+                completed++;
+                if (completed >= MAX_VISIBLE) isAnimating = false;
+            };
+
+            fanCardsEl.forEach((el, idx) => {
+                const slot = visibleMap.get(idx);
+                
+                if (slot !== undefined) {
+                    const base = FAN_POSITIONS[slot];
+                    const targetX = base.x * mult;
+                    const targetY = base.y * hMult;
+
+                    gsap.set(el, { zIndex: base.zIndex });
+
+                    if (isFirst) {
+                        gsap.set(el, { x: 0, y: 12 * hMult + 'rem', rotation: 0, scale: 0.5, opacity: 0 });
+                        gsap.to(el, {
+                            x: targetX + 'rem', y: targetY + 'rem', rotation: base.rot, scale: base.scale, opacity: 1,
+                            duration: 1.2, ease: "elastic.out(1.05,.78)", delay: 0.2 + slot * 0.06, onComplete
+                        });
+                    } else {
+                        // We assume all elements are somewhat on screen or just entering
+                        gsap.to(el, {
+                            x: targetX + 'rem', y: targetY + 'rem', rotation: base.rot, scale: base.scale, opacity: 1,
+                            duration: 0.5, ease: "power2.out", onComplete
+                        });
+                    }
+                } else {
+                    gsap.to(el, { opacity: 0, scale: 0.5, zIndex: 0, duration: 0.4 });
+                }
+            });
+        };
+
+        // Initialize
+        updateFanLayout(null, true);
+
+        // Controls
+        document.getElementById('fan-prev').addEventListener('click', () => {
+            if (isAnimating) return;
+            centerIndex = (centerIndex - 1 + totalFanCards) % totalFanCards;
+            updateFanLayout('left');
+        });
+
+        document.getElementById('fan-next').addEventListener('click', () => {
+            if (isAnimating) return;
+            centerIndex = (centerIndex + 1) % totalFanCards;
+            updateFanLayout('right');
+        });
+
+        // Hover Logic
+        const updateHover = () => {
+            if (isAnimating) return;
+            const visibleMap = getVisibleMap(centerIndex);
+            const mult = getResponsiveMultiplier();
+            const hMult = getHeightMultiplier();
+
+            fanCardsEl.forEach((el, idx) => {
+                const slot = visibleMap.get(idx);
+                if (slot === undefined) return;
+                
+                const base = FAN_POSITIONS[slot];
+                let tx = base.x * mult;
+                let ty = base.y * hMult;
+                let rot = base.rot;
+                let scale = base.scale;
+
+                if (activeHoverSlot !== null) {
+                    const dist = Math.abs(slot - activeHoverSlot);
+                    if (slot === activeHoverSlot) {
+                        ty -= 2.5 * hMult;
+                        scale *= 1.08;
+                    } else {
+                        const push = 8 * (1 - Math.abs((slot - HALF) / HALF)) * (1 + 0.2 * Math.max(0, 3 - dist));
+                        if (slot < activeHoverSlot) {
+                            tx -= push * mult;
+                            rot -= 3 / (dist + 1);
+                        } else {
+                            tx += push * mult;
+                            rot += 3 / (dist + 1);
+                        }
+                    }
+                }
+
+                gsap.to(el, {
+                    x: tx + 'rem', y: ty + 'rem', rotation: rot, scale: scale,
+                    duration: 0.5, ease: "elastic.out(1,.75)", overwrite: "auto"
+                });
+            });
+        };
+
+        fanCardsEl.forEach((el, idx) => {
+            el.addEventListener('mouseenter', () => {
+                if (isAnimating) return;
+                const visibleMap = getVisibleMap(centerIndex);
+                activeHoverSlot = visibleMap.get(idx);
+                if (activeHoverSlot !== undefined) updateHover();
+            });
+        });
+
+        fanLayout.addEventListener('mouseleave', () => {
+            if (isAnimating) return;
+            activeHoverSlot = null;
+            setTimeout(updateHover, 50);
+        });
+
+        window.addEventListener('resize', () => {
+            if (!isAnimating) updateHover();
+        });
+    }
+
 });

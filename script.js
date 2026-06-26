@@ -216,16 +216,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Social Cards Fan Carousel ---
     const DEMO_CARDS = [
-        { imgUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=700&fit=crop", alt: "Mountain landscape" },
-        { imgUrl: "https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=400&h=700&fit=crop", alt: "City night" },
-        { imgUrl: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=700&fit=crop", alt: "Foggy forest" },
-        { imgUrl: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=700&fit=crop", alt: "Sunlit woods" },
-        { imgUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=700&fit=crop", alt: "Tropical beach" },
-        { imgUrl: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&h=700&fit=crop", alt: "Starry mountain" },
-        { imgUrl: "https://images.unsplash.com/photo-1476820865390-c52aeebb9891?w=400&h=700&fit=crop", alt: "Golden sunset" },
-        { imgUrl: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=700&fit=crop", alt: "Lake reflection" },
-        { imgUrl: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=400&h=700&fit=crop", alt: "Green valley" },
-        { imgUrl: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=700&fit=crop", alt: "Sunbeam nature" }
+        { imgUrl: "https://images.unsplash.com/photo-1513269811440-6644f12d8a57?w=400&h=700&fit=crop", alt: "Gift boxes" },
+        { imgUrl: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=400&h=700&fit=crop", alt: "Kids toys" },
+        { imgUrl: "https://images.unsplash.com/photo-1515488042178-9f3453950c76?w=400&h=700&fit=crop", alt: "Wooden toys" },
+        { imgUrl: "https://images.unsplash.com/photo-1558981359-219d6364c9c8?w=400&h=700&fit=crop", alt: "Teddy bear" },
+        { imgUrl: "https://images.unsplash.com/photo-1585366119957-77ec1c1955b2?w=400&h=700&fit=crop", alt: "Stationery" },
+        { imgUrl: "https://images.unsplash.com/photo-1545989104-582ff63f8510?w=400&h=700&fit=crop", alt: "Gift wrapping" },
+        { imgUrl: "https://images.unsplash.com/photo-1519689680058-324335c77eba?w=400&h=700&fit=crop", alt: "Baby accessories" },
+        { imgUrl: "https://images.unsplash.com/photo-1607082352822-411a5b84d436?w=400&h=700&fit=crop", alt: "Kids fashion" },
+        { imgUrl: "https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=400&h=700&fit=crop", alt: "Presents" },
+        { imgUrl: "https://images.unsplash.com/photo-1584849646536-1db810fbab87?w=400&h=700&fit=crop", alt: "Kids crafts" }
     ];
 
     const MAX_VISIBLE = 7;

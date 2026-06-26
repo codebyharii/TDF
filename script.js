@@ -216,16 +216,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Social Cards Fan Carousel ---
     const DEMO_CARDS = [
-        { imgUrl: "https://images.unsplash.com/photo-1513269811440-6644f12d8a57?w=400&h=700&fit=crop", alt: "Gift boxes" },
-        { imgUrl: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=400&h=700&fit=crop", alt: "Kids toys" },
-        { imgUrl: "https://images.unsplash.com/photo-1515488042178-9f3453950c76?w=400&h=700&fit=crop", alt: "Wooden toys" },
-        { imgUrl: "https://images.unsplash.com/photo-1558981359-219d6364c9c8?w=400&h=700&fit=crop", alt: "Teddy bear" },
-        { imgUrl: "https://images.unsplash.com/photo-1585366119957-77ec1c1955b2?w=400&h=700&fit=crop", alt: "Stationery" },
-        { imgUrl: "https://images.unsplash.com/photo-1545989104-582ff63f8510?w=400&h=700&fit=crop", alt: "Gift wrapping" },
-        { imgUrl: "https://images.unsplash.com/photo-1519689680058-324335c77eba?w=400&h=700&fit=crop", alt: "Baby accessories" },
-        { imgUrl: "https://images.unsplash.com/photo-1607082352822-411a5b84d436?w=400&h=700&fit=crop", alt: "Kids fashion" },
-        { imgUrl: "https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=400&h=700&fit=crop", alt: "Presents" },
-        { imgUrl: "https://images.unsplash.com/photo-1584849646536-1db810fbab87?w=400&h=700&fit=crop", alt: "Kids crafts" }
+        { imgUrl: "https://media.thedesignfactoryshop.com/Categories/bags-cd283312.jpg", alt: "Premium Bags" },
+        { imgUrl: "https://media.thedesignfactoryshop.com/Categories/kids-accessories-f75d6e7d.png", alt: "Kids Accessories" },
+        { imgUrl: "https://media.thedesignfactoryshop.com/Categories/gift-stationery-760309fb.png", alt: "Gift Stationery" },
+        { imgUrl: "https://media.thedesignfactoryshop.com/Categories/organisers-fd1acc17.png", alt: "Organisers" },
+        { imgUrl: "https://media.thedesignfactoryshop.com/Categories/combos-8d86c3d4.png", alt: "Combos" },
+        { imgUrl: "https://media.thedesignfactoryshop.com/Categories/labels-597f73a9.png", alt: "Labels" },
+        { imgUrl: "https://media.thedesignfactoryshop.com/Categories/bags-cd283312.jpg", alt: "Handbags" },
+        { imgUrl: "https://media.thedesignfactoryshop.com/Categories/kids-accessories-f75d6e7d.png", alt: "Children items" },
+        { imgUrl: "https://media.thedesignfactoryshop.com/Categories/gift-stationery-760309fb.png", alt: "Gifting" },
+        { imgUrl: "https://media.thedesignfactoryshop.com/Categories/organisers-fd1acc17.png", alt: "Storage Organisers" }
     ];
 
     const MAX_VISIBLE = 7;

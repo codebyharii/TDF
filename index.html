@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- GSAP for Advanced Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
     <!-- Navbar -->
@@ -31,6 +34,28 @@
             <p class="hero-subtitle">Premium personalized gifts, school essentials & kids' accessories that leave a lasting impression.</p>
             <div class="hero-buttons">
                 <a href="#collections" class="btn btn-primary">Explore Collection</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Scroll Morph Hero Section -->
+    <section class="scroll-morph-hero-section" id="scroll-morph-hero">
+        <div class="morph-hero-container">
+            <!-- Intro Text -->
+            <div class="morph-intro-text">
+                <h1>The future is built on AI.</h1>
+                <p>SCROLL TO EXPLORE</p>
+            </div>
+
+            <!-- Active Content Text (Fades in) -->
+            <div class="morph-active-content">
+                <h2>Explore Our Vision</h2>
+                <p>Discover a world where technology meets creativity.<br>Scroll through our curated collection of innovations designed to shape the future.</p>
+            </div>
+
+            <!-- Cards Container -->
+            <div class="morph-cards-container" id="morph-cards-container">
+                <!-- Javascript will inject the 20 FlipCards here -->
             </div>
         </div>
     </section>
